@@ -7,7 +7,6 @@ namespace Singleton
     {
         #region Properties
         private static readonly Lazy<MessageQueue> lazyInstance = new Lazy<MessageQueue>(() => new MessageQueue());
-        private static readonly object obj = new object();
         public static MessageQueue Instance
         {
             get
@@ -26,7 +25,7 @@ namespace Singleton
         public void EnqueueMessage(Message message)
         {
             Console.WriteLine("Message getting Queued - Id: {0}, Text: {1}, CreatedTime: {2}", message.Id, message.Text, message.CreatedTime);
-            lock (obj)
+            lock (Queue)
             {
                 Queue.Enqueue(message);
             }
